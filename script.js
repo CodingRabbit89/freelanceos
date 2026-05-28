@@ -20,7 +20,7 @@ function renderFakeStats() {
   container.innerHTML = `
     <div class="bg-zinc-900 p-6 rounded-3xl">
       <p class="text-zinc-400 text-sm">Active Projects</p>
-      <p class="text-5xl font-bold mt-2 text-white">3</p>
+      <p class="text-5xl font-bold mt-2 text-white">4</p>
     </div>
     <div class="bg-zinc-900 p-6 rounded-3xl">
       <p class="text-zinc-400 text-sm">Total Budget</p>
