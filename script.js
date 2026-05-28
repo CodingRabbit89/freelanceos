@@ -1,3 +1,11 @@
-console.log("FreelanceOS loaded - v0.1");
+console.log("🚀 FreelanceOS v0.1 loaded successfully");
 
-// TODO: Add project management logic here
+// Basic button test
+document.addEventListener('DOMContentLoaded', () => {
+  const addBtn = document.getElementById('add-project-btn');
+  if (addBtn) {
+    addBtn.addEventListener('click', () => {
+      alert("New Project modal coming in next step!");
+    });
+  }
+});

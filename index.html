@@ -3,23 +3,82 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FreelanceOS - Your Freelance Dashboard</title>
+    <title>FreelanceOS - Freelance Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="script.js" defer></script>
-    <link rel="stylesheet" href="styles.css">
   </head>
   <body class="bg-zinc-950 text-white min-h-screen">
     <div class="max-w-7xl mx-auto">
-      <header class="border-b border-zinc-800 p-6">
-        <h1 class="text-3xl font-bold tracking-tight">FreelanceOS</h1>
-        <p class="text-zinc-400 text-sm">Personal Freelance Dashboard</p>
+      <!-- Header -->
+      <header class="border-b border-zinc-800 px-8 py-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <h1 class="text-3xl font-bold tracking-tight text-white">
+              FreelanceOS
+            </h1>
+            <p class="text-zinc-400 text-sm">Personal Freelance Dashboard</p>
+          </div>
+        </div>
       </header>
 
       <div class="flex">
-        <!-- Sidebar will go here later -->
+        <!-- Sidebar -->
+        <aside
+          class="w-64 border-r border-zinc-800 min-h-screen p-6 hidden md:block"
+        >
+          <nav class="space-y-1">
+            <a
+              href="#"
+              class="flex items-center gap-3 px-4 py-3 bg-zinc-900 rounded-2xl text-white font-medium"
+            >
+              <span>📊</span>
+              Dashboard
+            </a>
+            <a
+              href="#"
+              class="flex items-center gap-3 px-4 py-3 hover:bg-zinc-900 rounded-2xl text-zinc-400 hover:text-white transition"
+            >
+              <span>📁</span>
+              Projects
+            </a>
+            <a
+              href="#"
+              class="flex items-center gap-3 px-4 py-3 hover:bg-zinc-900 rounded-2xl text-zinc-400 hover:text-white transition"
+            >
+              <span>📈</span>
+              Reports
+            </a>
+          </nav>
+        </aside>
+
+        <!-- Main Content -->
         <main class="flex-1 p-8">
-          <h2 class="text-2xl font-semibold mb-8">Dashboard</h2>
-          <!-- Content will go here -->
+          <div class="flex justify-between items-center mb-10">
+            <h2 class="text-3xl font-semibold">Dashboard</h2>
+            <button
+              id="add-project-btn"
+              class="bg-white text-black px-6 py-3 rounded-2xl font-semibold hover:bg-zinc-200 transition flex items-center gap-2"
+            >
+              <span>+</span>
+              New Project
+            </button>
+          </div>
+
+          <!-- Stats -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12" id="stats">
+            <!-- Stats will be populated by JS later -->
+          </div>
+
+          <!-- Projects Area -->
+          <div class="mb-4 flex justify-between items-center">
+            <h3 class="text-xl font-medium">Your Projects</h3>
+          </div>
+          <div id="projects-list" class="bg-zinc-900 rounded-3xl p-6">
+            <!-- Projects will appear here -->
+            <p class="text-zinc-400 text-center py-12">
+              No projects yet. Add your first one!
+            </p>
+          </div>
         </main>
       </div>
     </div>
