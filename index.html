@@ -82,75 +82,79 @@
       </div>
     </div>
     <dialog
-      class="flex items-center justify-center bg-zinc-900 rounded-3xl border-none w-full max-w-lg p-0 text-white bg-black/50 backdrop-blur-sm"
       id="new-project-dialog"
+      class="backdrop:bg-zinc-950/80 text-white rounded-3x1 p-0 w-full max-w-lg mx-auto"
     >
-      <form method="dialog" class="p-6 flex flex-col gap-4">
-        <h2 class="text-2xl font-semibold">New Project</h2>
-        <input
-          type="text"
-          name="project-name"
-          placeholder="Project Title"
-          class="w-full px-4 py-3 rounded-lg bg-zinc-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-          required
-        />
-        <input
-          type="text"
-          name="client-name"
-          placeholder="Client Name"
-          class="w-full px-4 py-3 rounded-lg bg-zinc-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-        <label for="status" class="flex items-center gap-2"
-          >Current Status:
-          <select
-            name="status"
-            class="px-4 py-3 rounded-lg bg-zinc-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            <option value="">Select Status</option>
-            <option value="proposal">Proposal</option>
-            <option value="in-progress">In Progress</option>
-            <option value="review">Review</option>
-            <option value="completed">Completed</option>
-          </select>
-        </label>
-        <label for="due-date" class="flex items-center gap-2"
-          >Deadline:
+      <div class="bg-zinc-900 3x1 p-8">
+        <h3 class="text2x1 font-semibold mb-6">New Project</h3>
+        <form id="new-project-form" class="space-y-5">
           <input
-            type="date"
-            name="due-date"
-            class="px-4 py-3 rounded-lg bg-zinc-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            type="text"
+            name="project-name"
+            placeholder="Project Title"
+            class="w-full px-4 py-3 rounded-lg bg-zinc-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
           />
-        </label>
-        <label for="budget" class="flex items-center gap-2"
-          >Budget (USD):
           <input
-            type="number"
-            name="budget"
-            placeholder="Budget (USD)"
-            class="px-4 py-3 rounded-lg bg-zinc-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            type="text"
+            name="client-name"
+            placeholder="Client Name"
+            class="w-full px-4 py-3 rounded-lg bg-zinc-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-        </label>
-        <textarea
-          name="project-description"
-          placeholder="Notes or Description"
-          class="w-full px-4 py-3 rounded-lg bg-zinc-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-          rows="4"
-        ></textarea>
-        <button
-          type="button"
-          commandfor="new-project-dialog"
-          command="close"
-          class="bg-gray-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-700 transition self-start"
-        >
-          Cancel
-        </button>
-        <button
-          type="submit"
-          class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition self-start"
-        >
-          Create Project
-        </button>
-      </form>
+          <label for="status" class="flex items-center gap-2"
+            >Current Status:
+            <select
+              name="status"
+              class="px-4 py-3 rounded-lg bg-zinc-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="">Select Status</option>
+              <option value="proposal">Proposal</option>
+              <option value="in-progress">In Progress</option>
+              <option value="review">Review</option>
+              <option value="completed">Completed</option>
+            </select>
+          </label>
+          <label for="due-date" class="flex items-center gap-2"
+            >Deadline:
+            <input
+              type="date"
+              name="due-date"
+              class="px-4 py-3 rounded-lg bg-zinc-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </label>
+          <label for="budget" class="flex items-center gap-2"
+            >Budget (USD):
+            <input
+              type="number"
+              name="budget"
+              placeholder="Budget (USD)"
+              class="px-4 py-3 rounded-lg bg-zinc-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </label>
+          <textarea
+            name="project-description"
+            placeholder="Notes or Description"
+            class="w-full px-4 py-3 rounded-lg bg-zinc-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            rows="4"
+          ></textarea>
+          <div class="flex gap-4 pt-6 border-t border-zinc-700">
+            <button
+              type="button"
+              id="cancel-btn"
+              class="flex-1 py-3 rounded-2x1 border border-zinc-700 hover:bg-zinc-800"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              id="create-project-btn"
+              class="flex-1 py-3 bg-white text-black rounded-2x1 font-semibold"
+            >
+              Create Project
+            </button>
+          </div>
+        </form>
+      </div>
     </dialog>
   </body>
 </html>

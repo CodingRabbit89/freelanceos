@@ -3,14 +3,40 @@ console.log("🚀 FreelanceOS v0.1 loaded successfully");
 document.addEventListener('DOMContentLoaded', () => {
   const addBtn = document.getElementById('add-project-btn');
   const dialog = document.getElementById('new-project-dialog');
-  if (addBtn) {
+  const closeBtn = document.getElementById('cancel-btn');
+  const form = document.getElementById('new-project-form');
+ 
+if (addBtn) {
     addBtn.addEventListener('click', () => {
       if (dialog) {
         dialog.showModal();
       }
     });
   }
+if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      for(let [key, value] of formData.entries()) {
+        console.log(`${key}: ${value}`);
+      }
+      form.reset();
+      if (dialog) {
+        dialog.close();
+      }
+      // Here you would normally handle form data and create a new project
+      
+    });
+  }
 
+if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      if (dialog) {
+        dialog.close();
+      }
+      form.reset();
+    });
+  }
   // Fake stats for now
   renderFakeStats();
 });
