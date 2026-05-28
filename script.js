@@ -2,10 +2,12 @@ console.log("🚀 FreelanceOS v0.1 loaded successfully");
 
 document.addEventListener('DOMContentLoaded', () => {
   const addBtn = document.getElementById('add-project-btn');
-  
+  const dialog = document.getElementById('new-project-dialog');
   if (addBtn) {
     addBtn.addEventListener('click', () => {
-      alert("✅ New Project button works!\n\nModal coming in Day 2.");
+      if (dialog) {
+        dialog.showModal();
+      }
     });
   }
 

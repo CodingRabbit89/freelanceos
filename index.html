@@ -21,15 +21,26 @@
 
       <div class="flex">
         <!-- Sidebar -->
-        <aside class="w-64 border-r border-zinc-800 min-h-screen p-6 hidden md:block">
+        <aside
+          class="w-64 border-r border-zinc-800 min-h-screen p-6 hidden md:block"
+        >
           <nav class="space-y-1">
-            <a href="#" class="flex items-center gap-3 px-4 py-3 bg-zinc-900 rounded-2xl text-white font-medium">
+            <a
+              href="#"
+              class="flex items-center gap-3 px-4 py-3 bg-zinc-900 rounded-2xl text-white font-medium"
+            >
               📊 Dashboard
             </a>
-            <a href="#" class="flex items-center gap-3 px-4 py-3 hover:bg-zinc-900 rounded-2xl text-zinc-400 hover:text-white transition">
+            <a
+              href="#"
+              class="flex items-center gap-3 px-4 py-3 hover:bg-zinc-900 rounded-2xl text-zinc-400 hover:text-white transition"
+            >
               📁 Projects
             </a>
-            <a href="#" class="flex items-center gap-3 px-4 py-3 hover:bg-zinc-900 rounded-2xl text-zinc-400 hover:text-white transition">
+            <a
+              href="#"
+              class="flex items-center gap-3 px-4 py-3 hover:bg-zinc-900 rounded-2xl text-zinc-400 hover:text-white transition"
+            >
               📈 Reports
             </a>
           </nav>
@@ -39,14 +50,19 @@
         <main class="flex-1 p-8">
           <div class="flex justify-between items-center mb-10">
             <h2 class="text-3xl font-semibold">Dashboard</h2>
-            <button id="add-project-btn"
-                    class="bg-white text-black px-6 py-3 rounded-2xl font-semibold hover:bg-zinc-200 transition flex items-center gap-2">
+            <button
+              id="add-project-btn"
+              class="bg-white text-black px-6 py-3 rounded-2xl font-semibold hover:bg-zinc-200 transition flex items-center gap-2"
+            >
               <span>+</span> New Project
             </button>
           </div>
 
           <!-- Stats Row -->
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12" id="stats-container">
+          <div
+            class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12"
+            id="stats-container"
+          >
             <!-- JS will populate this -->
           </div>
 
@@ -54,11 +70,87 @@
           <div class="mb-4 flex justify-between items-center">
             <h3 class="text-xl font-medium">Your Projects</h3>
           </div>
-          <div id="projects-list" class="bg-zinc-900 rounded-3xl p-8 min-h-[400px]">
-            <p class="text-zinc-400 text-center py-20">No projects yet. Add your first one above!</p>
+          <div
+            id="projects-list"
+            class="bg-zinc-900 rounded-3xl p-8 min-h-[400px]"
+          >
+            <p class="text-zinc-400 text-center py-20">
+              No projects yet. Add your first one above!
+            </p>
           </div>
         </main>
       </div>
     </div>
+    <dialog
+      class="flex items-center justify-center bg-zinc-900 rounded-3xl border-none w-full max-w-lg p-0 text-white bg-black/50 backdrop-blur-sm"
+      id="new-project-dialog"
+    >
+      <form method="dialog" class="p-6 flex flex-col gap-4">
+        <h2 class="text-2xl font-semibold">New Project</h2>
+        <input
+          type="text"
+          name="project-name"
+          placeholder="Project Title"
+          class="w-full px-4 py-3 rounded-lg bg-zinc-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+          required
+        />
+        <input
+          type="text"
+          name="client-name"
+          placeholder="Client Name"
+          class="w-full px-4 py-3 rounded-lg bg-zinc-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <label for="status" class="flex items-center gap-2"
+          >Current Status:
+          <select
+            name="status"
+            class="px-4 py-3 rounded-lg bg-zinc-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="">Select Status</option>
+            <option value="proposal">Proposal</option>
+            <option value="in-progress">In Progress</option>
+            <option value="review">Review</option>
+            <option value="completed">Completed</option>
+          </select>
+        </label>
+        <label for="due-date" class="flex items-center gap-2"
+          >Deadline:
+          <input
+            type="date"
+            name="due-date"
+            class="px-4 py-3 rounded-lg bg-zinc-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </label>
+        <label for="budget" class="flex items-center gap-2"
+          >Budget (USD):
+          <input
+            type="number"
+            name="budget"
+            placeholder="Budget (USD)"
+            class="px-4 py-3 rounded-lg bg-zinc-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </label>
+        <textarea
+          name="project-description"
+          placeholder="Notes or Description"
+          class="w-full px-4 py-3 rounded-lg bg-zinc-800 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+          rows="4"
+        ></textarea>
+        <button
+          type="button"
+          commandfor="new-project-dialog"
+          command="close"
+          class="bg-gray-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-700 transition self-start"
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition self-start"
+        >
+          Create Project
+        </button>
+      </form>
+    </dialog>
   </body>
 </html>
