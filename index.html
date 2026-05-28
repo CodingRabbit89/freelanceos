@@ -56,12 +56,6 @@
             >
               <span>+</span> New Project
             </button>
-            <button
-              id="clear-project-btn"
-              class="bg-white text-black px-6 py-3 rounded-2xl font-semibold hover:bg-zinc-200 transition flex items-center gap-2"
-            >
-              <span>-</span> Clear Projects
-            </button>
           </div>
 
           <!-- Stats Row -->
@@ -75,10 +69,16 @@
           <!-- Projects Section -->
           <div class="mb-4 flex justify-between items-center">
             <h3 class="text-xl font-medium">Your Projects</h3>
+            <button
+              id="clear-project-btn"
+              class="bg-white text-black px-6 py-3 rounded-2xl font-semibold hover:bg-zinc-200 transition flex items-center gap-2"
+            >
+              <span>-</span> Clear Projects
+            </button>
           </div>
           <div
             id="projects-list"
-            class="bg-zinc-900 rounded-3xl p-8 min-h-[400px]"
+            class="bg-zinc-900 rounded-3xl p-8 min-h-[400px] flex flex-col gap-4"
           >
             <!-- JS will populate this -->
           </div>
