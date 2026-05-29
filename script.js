@@ -1,5 +1,6 @@
 console.log("🚀 FreelanceOS v0.1 loaded successfully");
 let projects = [];
+let editingId = null;
 
 document.addEventListener("DOMContentLoaded", () => {
   const addBtn = document.getElementById("add-project-btn");
@@ -31,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
       const formData = new FormData(form);
       const formObject = {
-        id: Date.now(),
+        id: editingId || Date.now(),
         title: formData.get("project-name"),
         client: formData.get("client-name"),
         status: formData.get("status"),
@@ -40,12 +41,18 @@ document.addEventListener("DOMContentLoaded", () => {
         notes: formData.get("project-description"),
         createdAt: new Date().toISOString(),
       };
-      projects.push(formObject);
+      if (editingId) {
+        const index = projects.findIndex((p) => p.id === editingId);
+        projects[index] = formObject;
+        editingId = null;
+      } else {
+        projects.push(formObject);
+      }
       localStorage.setItem("projects", JSON.stringify(projects));
       renderProjects();
       if (dialog) {
-        form.reset();
         dialog.close();
+        resetModal();
       }
     });
   }
@@ -54,8 +61,8 @@ document.addEventListener("DOMContentLoaded", () => {
     closeBtn.addEventListener("click", () => {
       if (dialog) {
         dialog.close();
+        resetModal();
       }
-      form.reset();
     });
   }
   renderStats();
@@ -112,7 +119,10 @@ function renderProjects() {
   </div>
 
   <div class="mt-6 pt-4 border-t border-zinc-600">
-    <button class="delete-btn text-red-400 hover:text-red-500 text-sm font-medium" data-id="${project.id}">
+  <button class="edit-btn text-blue-400 hover:text-blue-500 text-sm font-medium mr-4" data-id="${project.id}">
+  Edit
+</button> 
+  <button class="delete-btn text-red-400 hover:text-red-500 text-sm font-medium" data-id="${project.id}">
       Delete Project
     </button>
   </div>
@@ -128,6 +138,15 @@ function renderProjects() {
         localStorage.setItem("projects", JSON.stringify(projects));
         renderProjects();
         renderStats();
+      }
+    });
+  });
+  document.querySelectorAll(".edit-btn").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      const id = Number(e.target.dataset.id);
+      const projectToEdit = projects.find((p) => p.id === id);
+      if (projectToEdit) {
+        openModalForEdit(projectToEdit);
       }
     });
   });
@@ -158,4 +177,41 @@ function renderStats() {
       <p class="text-5xl font-bold mt-2 text-amber-400">${completionRate}%</p>
     </div>
   `;
+}
+
+function openModalForEdit(project) {
+  editingId = project.id;
+
+  const dialog = document.getElementById("new-project-dialog");
+  const form = document.getElementById("new-project-form");
+  const titleElement = dialog.querySelector("h3");
+  const submitBtn = form.querySelector('button[type="submit"]');
+  if (submitBtn) {
+    submitBtn.textContent = "Save Changes";
+  }
+
+  if (titleElement) {
+    titleElement.textContent = "Edit Project";
+  }
+
+  form.elements["project-name"].value = project.title;
+  form.elements["client-name"].value = project.client;
+  form.elements["status"].value = project.status;
+  form.elements["due-date"].value = project.deadline;
+  form.elements["budget"].value = project.budget;
+  form.elements["project-description"].value = project.notes;
+
+  dialog.showModal();
+}
+
+function resetModal() {
+  editingId = null;
+  const dialog = document.getElementById("new-project-dialog");
+  const form = document.getElementById("new-project-form");
+  const titleElement = dialog.querySelector("h3");
+  const submitBtn = form.querySelector('button[type="submit"]');
+
+  if (titleElement) titleElement.textContent = "New Project";
+  if (submitBtn) submitBtn.textContent = "Create Project";
+  form.reset();
 }
