@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
       projects = [];
       localStorage.removeItem("projects");
       renderProjects();
+      renderStats();
     });
   }
 
@@ -46,7 +47,6 @@ document.addEventListener("DOMContentLoaded", () => {
         form.reset();
         dialog.close();
       }
-      // Here you would normally handle form data and create a new project
     });
   }
 
@@ -58,8 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
       form.reset();
     });
   }
-  // Fake stats for now
-  renderFakeStats();
+  renderStats();
 });
 
 function renderProjects() {
@@ -119,6 +118,7 @@ function renderProjects() {
   </div>
     `;
     container.appendChild(projectCard);
+    renderStats();
   }
   document.querySelectorAll(".delete-btn").forEach((btn) => {
     btn.addEventListener("click", (e) => {
@@ -127,27 +127,35 @@ function renderProjects() {
         projects = projects.filter((p) => p.id !== id);
         localStorage.setItem("projects", JSON.stringify(projects));
         renderProjects();
+        renderStats();
       }
     });
   });
 }
 
-function renderFakeStats() {
+function renderStats() {
   const container = document.getElementById("stats-container");
   if (!container) return;
+
+  const totalProjects = projects.length;
+  const completed = projects.filter((p) => p.status === "completed").length;
+  const active = totalProjects - completed;
+  const totalBudget = projects.reduce((sum, p) => sum + p.budget, 0);
+  const completionRate =
+    totalProjects > 0 ? Math.round((completed / totalProjects) * 100) : 0;
 
   container.innerHTML = `
     <div class="bg-zinc-900 p-6 rounded-3xl">
       <p class="text-zinc-400 text-sm">Active Projects</p>
-      <p class="text-5xl font-bold mt-2 text-white">4</p>
+      <p class="text-5xl font-bold mt-2 text-white">${active}</p>
     </div>
     <div class="bg-zinc-900 p-6 rounded-3xl">
       <p class="text-zinc-400 text-sm">Total Budget</p>
-      <p class="text-5xl font-bold mt-2 text-emerald-400">$8,450</p>
+      <p class="text-5xl font-bold mt-2 text-emerald-400">$${totalBudget.toLocaleString()}</p>
     </div>
     <div class="bg-zinc-900 p-6 rounded-3xl">
       <p class="text-zinc-400 text-sm">Completion Rate</p>
-      <p class="text-5xl font-bold mt-2 text-amber-400">67%</p>
+      <p class="text-5xl font-bold mt-2 text-amber-400">${completionRate}%</p>
     </div>
   `;
 }
