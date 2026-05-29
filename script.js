@@ -73,13 +73,23 @@ function renderProjects() {
   for (let i = 0; i < projects.length; i++) {
     const project = projects[i];
     const projectCard = document.createElement("div");
+    let statusClass = "";
+    if (project.status === "in-progress") {
+      statusClass = "bg-yellow-500";
+    } else if (project.status === "completed") {
+      statusClass = "bg-green-500";
+    } else if (project.status === "review") {
+      statusClass = "bg-purple-500";
+    } else if (project.status === "proposal") {
+      statusClass = "bg-blue-500";
+    }
     projectCard.className = "bg-zinc-700 p-4 rounded-lg mb-4";
     projectCard.innerHTML = `
     <div class="flex flex-col justify-between items-start gap-2 mb-4">
       <h3 class="text-xl font-bold text-white uppercase border-b border-zinc-500">${project.title}</h3>
       <div class="flex flex-col items-start gap-2 mt-4 gap-4">
       <p class="text-white">${project.client}</p>
-      <p class="text-sm text-white mt-2 rounded-full bg-zinc-600 px-3 py-1">Status: ${project.status}</p>
+      <p class="text-sm text-white mt-2 rounded-full ${statusClass} px-3 py-1">Status: ${project.status}</p>
       <p class="text-sm text-white mt-2">Due Date: ${project.deadline}</p>
       <p class="text-sm text-white mt-2">Budget: $${project.budget}</p>
       <p class="text-sm text-white mt-2">Notes: ${project.notes}</p>
@@ -87,19 +97,18 @@ function renderProjects() {
       </div>
     </div>
     `;
-    container.appendChild(projectCard);
-    // Add delete listeners
-    document.querySelectorAll(".delete-btn").forEach((btn) => {
-      btn.addEventListener("click", (e) => {
-        const id = Number(e.target.dataset.id);
-        if (confirm("Delete this project?")) {
-          projects = projects.filter((p) => p.id !== id);
-          localStorage.setItem("projects", JSON.stringify(projects));
-          renderProjects();
-        }
-      });
-    });
+    container.appendChild(projectCard); // Add delete listeners
   }
+  document.querySelectorAll(".delete-btn").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      const id = Number(e.target.dataset.id);
+      if (confirm("Delete this project?")) {
+        projects = projects.filter((p) => p.id !== id);
+        localStorage.setItem("projects", JSON.stringify(projects));
+        renderProjects();
+      }
+    });
+  });
 }
 
 function renderFakeStats() {
