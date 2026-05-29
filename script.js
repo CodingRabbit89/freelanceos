@@ -85,19 +85,40 @@ function renderProjects() {
     }
     projectCard.className = "bg-zinc-700 p-4 rounded-lg mb-4";
     projectCard.innerHTML = `
-    <div class="flex flex-col justify-between items-start gap-2 mb-4">
-      <h3 class="text-xl font-bold text-white uppercase border-b border-zinc-500">${project.title}</h3>
-      <div class="flex flex-col items-start gap-2 mt-4 gap-4">
-      <p class="text-white">${project.client}</p>
-      <p class="text-sm text-white mt-2 rounded-full ${statusClass} px-3 py-1">Status: ${project.status}</p>
-      <p class="text-sm text-white mt-2">Due Date: ${project.deadline}</p>
-      <p class="text-sm text-white mt-2">Budget: $${project.budget}</p>
-      <p class="text-sm text-white mt-2">Notes: ${project.notes}</p>
-      <button class="delete-btn text-red-400 text-sm bg-zinc-600 hover:bg-zinc-500 py-2 px-4 rounded" data-id="${project.id}">Delete</button>
-      </div>
+    <div class="flex justify-between items-start">
+    <div>
+      <h3 class="text-xl font-semibold text-white">${project.title}</h3>
+      <p class="text-zinc-400 mt-1">${project.client}</p>
     </div>
+    
+    <span class="px-4 py-1 text-xs font-medium rounded-full ${statusClass} text-black">
+      ${project.status}
+    </span>
+  </div>
+
+  <div class="mt-6 grid grid-cols-2 gap-4 text-sm">
+    <div>
+      <p class="text-zinc-500">Due Date</p>
+      <p class="text-white">${project.deadline || "No deadline"}</p>
+    </div>
+    <div>
+      <p class="text-zinc-500">Budget</p>
+      <p class="text-emerald-400 font-medium">$${project.budget}</p>
+    </div>
+  </div>
+
+  <div class="mt-6">
+    <p class="text-zinc-500 text-sm">Notes:</p>
+    <p class="text-zinc-300 text-sm line-clamp-2">${project.notes || "No notes added"}</p>
+  </div>
+
+  <div class="mt-6 pt-4 border-t border-zinc-600">
+    <button class="delete-btn text-red-400 hover:text-red-500 text-sm font-medium" data-id="${project.id}">
+      Delete Project
+    </button>
+  </div>
     `;
-    container.appendChild(projectCard); // Add delete listeners
+    container.appendChild(projectCard);
   }
   document.querySelectorAll(".delete-btn").forEach((btn) => {
     btn.addEventListener("click", (e) => {
